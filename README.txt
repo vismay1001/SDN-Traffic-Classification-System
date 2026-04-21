@@ -1,8 +1,6 @@
 Traffic Classification System using SDN (OS-Ken)
 
-Problem Statement
-
-Classify network traffic into TCP, UDP, and ICMP using an SDN controller and analyze traffic behavior in a Mininet-based network.
+Problem Statement: Classify network traffic into TCP, UDP, and ICMP using an SDN controller and analyze traffic behavior in a Mininet-based network.
 
 
 Objective
@@ -109,4 +107,3 @@ Future Improvements
 - Add flow rule optimization
 - Integrate machine learning for classification
 - Add visualization dashboard
-- Implement QoS and traffic prioritization
