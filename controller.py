@@ -22,13 +22,13 @@ class TrafficClassifier(app_manager.OSKenApp):
         self.last_seen = defaultdict(float)
         self.session_active = defaultdict(bool)
 
-        self.session_timeout = 3   # seconds of inactivity
-        self.min_packets = 5       # minimum packets before summary
+        self.session_timeout = 3  
+        self.min_packets = 5      
 
         # background thread
         self.monitor_thread = hub.spawn(self.check_sessions)
 
-    # ================= SESSION CHECK =================
+  
     def check_sessions(self):
         while True:
             current_time = time.time()
@@ -49,7 +49,7 @@ class TrafficClassifier(app_manager.OSKenApp):
 
             hub.sleep(1)
 
-    # ================= SWITCH CONNECT =================
+ 
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
         datapath = ev.msg.datapath
@@ -73,7 +73,7 @@ class TrafficClassifier(app_manager.OSKenApp):
 
         self.logger.info(f"[CONNECTED] Switch {datapath.id}")
 
-    # ================= PACKET HANDLER =================
+   
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def packet_in_handler(self, ev):
         msg = ev.msg
@@ -113,7 +113,7 @@ class TrafficClassifier(app_manager.OSKenApp):
 
             self.logger.info(f"[PACKET] {protocol} | {src} -> {dst}")
 
-        # ================= FORWARD =================
+        
         data = None
         if msg.buffer_id == ofproto.OFP_NO_BUFFER:
             data = msg.data
@@ -127,7 +127,7 @@ class TrafficClassifier(app_manager.OSKenApp):
         )
         datapath.send_msg(out)
 
-    # ================= CLASSIFIER =================
+  
     def classify(self, pkt):
         if pkt.get_protocol(arp.arp):
             return "ARP"
