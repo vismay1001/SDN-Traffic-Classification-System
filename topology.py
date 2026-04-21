@@ -10,7 +10,7 @@ class TrafficClassificationTopo(Topo):
     def build(self):
         s1 = self.addSwitch("s1")
 
-        # Increased hosts from 3 → 5
+        
         hosts = []
         for i in range(1, 6):
             h = self.addHost(f"h{i}", ip=f"10.0.0.{i}/24")
